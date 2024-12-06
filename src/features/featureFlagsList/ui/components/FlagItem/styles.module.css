@@ -1,0 +1,61 @@
+.summary {
+    background-color: #eee;
+    color: #444;
+    padding: .5rem;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    list-style: none;
+    display: flex;
+    align-content: center;
+    gap: 1rem;
+    font-size: .9rem;
+    position: relative;
+}
+
+.summary:after {
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    right: 2%;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: red;
+    transform: rotate(45deg);
+}
+
+.summary::-webkit-details-marker {
+    display: none;
+}
+
+.summaryEnabled:after {
+    background-color: #4ceb34;
+}
+
+details:has(> .description) .summary {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+details:not(:has(> .description)) .summary {
+    padding-left: 2.625rem;
+}
+
+
+details[open] {
+    img {
+        transform: rotate(180deg);
+    }
+}
+
+.description {
+    font-size: .85rem;
+    padding: 0 2rem;
+    background-color: white;
+    word-break: break-all;
+    overflow: hidden;
+}

@@ -7,37 +7,36 @@ on:
 
 jobs:
   release:
-    name: Build and Release
     runs-on: ubuntu-latest
 
     steps:
-      # Шаг 1: Клонируем репозиторий
+      # Шаг 1: Клонируем код
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Шаг 2: Устанавливаем Node.js и pnpm
+      # Шаг 2: Устанавливаем Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'pnpm'
+          node-version: '18' # Устанавливаем нужную версию Node.js
 
+      # Шаг 3: Устанавливаем pnpm
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Шаг 3: Устанавливаем зависимости
+      # Шаг 4: Устанавливаем зависимости проекта с помощью pnpm
       - name: Install dependencies
         run: pnpm install
 
-      # Шаг 4: Собираем проект
+      # Шаг 5: Собираем проект
       - name: Build project
         run: pnpm build
 
-      # Шаг 5: Проверяем содержимое build (отладка)
+      # Шаг 6: Проверяем содержимое build (отладка)
       - name: List build folder contents
         run: ls -la build # Показывает файлы, которые собрались в папке build
 
-      # Шаг 6: Упаковываем только содержимое build
+      # Шаг 7: Упаковываем только содержимое build
       - name: Archive build folder
         run: |
           mkdir release-only
@@ -46,7 +45,7 @@ jobs:
           tar -czvf ../build.tar.gz . # Упаковываем содержимое папки release-only
           cd .. # Возвращаемся в корень
 
-      # Шаг 7: Создаём релиз и загружаем архив
+      # Шаг 8: Создаём релиз и загружаем архив
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:

@@ -20,9 +20,11 @@ jobs:
         with:
           node-version: '18' # Устанавливаем нужную версию Node.js
 
-      # Шаг 3: Устанавливаем pnpm
+      # Шаг 3: Устанавливаем pnpm с использованием официального действия
       - name: Install pnpm
-        run: npm install -g pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '7' # Устанавливаем нужную версию pnpm (например, 7)
 
       # Шаг 4: Устанавливаем зависимости проекта с помощью pnpm
       - name: Install dependencies
@@ -36,7 +38,7 @@ jobs:
       - name: List build folder contents
         run: ls -la build # Показывает файлы, которые собрались в папке build
 
-      # Шаг 7: Упаковываем только содержимое build
+      # Шаг 7: Архивируем содержимое build
       - name: Archive build folder
         run: |
           mkdir release-only

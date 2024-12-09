@@ -55,4 +55,5 @@ jobs:
           name: Release ${{ github.ref_name }}
           body: |
             Этот релиз создан автоматически.
-          files: build.tar.gz
+          token: ${{ secrets.GITHUB_TOKEN }}  # Используем GITHUB_TOKEN для доступа
+          artifacts: build.tar.gz

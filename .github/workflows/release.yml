@@ -3,16 +3,19 @@ name: Create Release
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*' # Срабатывает при пуше тегов, начинающихся с "v"
 
 jobs:
   release:
+    name: Build and Release
     runs-on: ubuntu-latest
 
     steps:
+      # Шаг 1: Клонируем репозиторий
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Шаг 2: Устанавливаем Node.js и pnpm
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -22,20 +25,28 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      # Шаг 3: Устанавливаем зависимости
       - name: Install dependencies
         run: pnpm install
 
+      # Шаг 4: Собираем проект
       - name: Build project
-        run: pnpm build # Это выполнит `craco build`
+        run: pnpm build
 
-      - name: Prepare release files
+      # Шаг 5: Проверяем содержимое build (отладка)
+      - name: List build folder contents
+        run: ls -la build # Показывает файлы, которые собрались в папке build
+
+      # Шаг 6: Упаковываем только содержимое build
+      - name: Archive build folder
         run: |
-          mkdir release
-          cp -r build/* release/
+          mkdir release-only
+          cp -r build/* release-only/ # Копируем только содержимое build
+          cd release-only
+          tar -czvf ../build.tar.gz . # Упаковываем содержимое папки release-only
+          cd .. # Возвращаемся в корень
 
-      - name: Archive release folder
-        run: tar -czvf release.tar.gz -C release .
-
+      # Шаг 7: Создаём релиз и загружаем архив
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
@@ -43,4 +54,4 @@ jobs:
           name: Release ${{ github.ref_name }}
           body: |
             Этот релиз создан автоматически.
-          files: release.tar.gz
+          files: build.tar.gz

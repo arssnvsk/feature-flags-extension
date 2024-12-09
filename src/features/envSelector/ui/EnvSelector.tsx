@@ -2,12 +2,11 @@ import type {FC} from 'react';
 import {EnvSelectorProps} from "./types";
 
 export const EnvSelector: FC<EnvSelectorProps> = (props) => {
+    const {options} = props
     return (
         <select {...props}>
             <option value="">Определить автоматически</option>
-            <option value={process.env.REACT_APP_BETA_URL_02}>02</option>
-            <option value={process.env.REACT_APP_BETA_URL_09}>09</option>
-            <option value={process.env.REACT_APP_BETA_URL_10}>10</option>
+            {options?.map(({url, name}) => <option key={url} value={url}>{name}</option>)}
         </select>
     );
 };

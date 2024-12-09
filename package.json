@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@types/chrome": "^0.0.287",
     "@types/node": "^16.18.121",
     "@types/react": "^18.3.13",
@@ -14,10 +15,9 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "prepare": "tcm src",
-    "start": "pnpm prepare react-scripts start",
-    "build": "pnpm prepare INLINE_RUNTIME_CHUNK=false react-scripts build",
-    "test": "pnpm prepare react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

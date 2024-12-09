@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": ".", // Required for `paths` to work
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["*"]
     },
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -20,5 +20,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "plugins": [{ "name": "typescript-plugin-css-modules" }]
 }

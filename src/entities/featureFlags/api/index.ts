@@ -1,4 +1,4 @@
-import { httpClient, HTTPClientResponse } from "../../../shared/httpClient";
+import { httpClient, HTTPClientResponse } from "@/shared/httpClient";
 import type { FeatureFlagRequestParams, FeatureFlagsResponse } from "./types";
 
 export const getFeatureFlags = async (params?: FeatureFlagRequestParams): HTTPClientResponse<FeatureFlagsResponse> => {

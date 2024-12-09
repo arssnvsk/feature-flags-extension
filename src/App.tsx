@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {getFeatureFlags} from "./entities/featureFlags";
-import type {FeatureFlagsList as FeatureFlagsListType} from './entities/featureFlags'
-import {FeatureFlagsList} from './features/featureFlagsList'
-import {Loader} from "./shared/uikit/Loader";
-import {Button} from "./shared/uikit/Button";
-import {EnvSelectorWidget} from "./widgets/EnvSelectorWidget";
+import {getFeatureFlags} from "@/entities/featureFlags";
+import type {FeatureFlagsList as FeatureFlagsListType} from '@/entities/featureFlags'
+import {FeatureFlagsList} from '@/features/featureFlagsList'
+import {Loader} from "@/shared/uikit/Loader";
+import {Button} from "@/shared/uikit/Button";
+import {EnvSelectorWidget} from "@/widgets/EnvSelectorWidget";
 import styles from './styles.module.css';
 
 export const App = () => {
